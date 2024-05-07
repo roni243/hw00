@@ -3,7 +3,7 @@
 ## Chapter 01 익명블로그 만들기
 ```text
 Chapter 01 완성 주소
-https://github.com/hanbit-book/SpringbootBlog-CH01.git
+https://github.com/hanbit-book/blog-01.git
 ```
 
 ![preview](./end.png)
