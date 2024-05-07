@@ -2,12 +2,15 @@
 
 ## Chapter 01 익명블로그 만들기
 ```text
-https://github.com/hanbit-book/spring-blog-v1-end.git
+Chapter 01 완성 주소
+https://github.com/hanbit-book/SpringbootBlog-CH01.git
 ```
 
 ![preview](./end.png)
 
 ### 1. 학습 순서
+- 화면 만들기
+- 테이블 만들기
 - 더미데이터 생성
 - 글목록보기
 - 글상세보기
@@ -27,7 +30,6 @@ https://github.com/hanbit-book/spring-blog-v1-end.git
 - JDK 21
 - IntelliJ or STS or VSCode
 - H2 (인메모리 테스트 데이터베이스 : 개발 용도로 사용)
-- MySQL8.0 (진짜 데이테베이스 : 서비스 용도로 사용)
 
 ### 4. 의존성
 - Lombok
@@ -35,5 +37,4 @@ https://github.com/hanbit-book/spring-blog-v1-end.git
 - Spring WEB
 - JPA
 - h2
-- MySQL
 - Mustache
