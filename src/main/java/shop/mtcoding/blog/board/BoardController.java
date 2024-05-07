@@ -25,7 +25,6 @@ public class BoardController {
     public String updateForm(@PathVariable Integer id, HttpServletRequest request){
         Board board = boardNativeRepository.findById(id);
         request.setAttribute("board", board);
-
         return "board/update-form";
     }
 
