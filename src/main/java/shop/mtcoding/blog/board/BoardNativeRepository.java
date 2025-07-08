@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -34,9 +36,21 @@ public class BoardNativeRepository {
 
 
     public List<Board> findAll() {
-        Query query = em.createNativeQuery("select * from board_tb order by id desc", Board.class);
+        Query query = em.createNativeQuery("select * from board_tb order by id desc");
+        List<Object[]> rows = query.getResultList();
 
-        return query.getResultList();
+        List<Board> boards = new ArrayList<>();
+        for (Object[] row : rows) {
+            Board board = new Board(
+                    ((Number) row[0]).intValue(),   // id
+                    (String) row[1],                // title
+                    (String) row[2],                // content
+                    (Timestamp) row[3]// created_at
+            );
+            boards.add(board);
+        }
+
+        return boards;
     }
 
     public Board findById(int id) {

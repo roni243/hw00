@@ -17,4 +17,11 @@ public class Board {
     private String title;
     private String content;
     private Timestamp createdAt;
+
+    public Board(Integer id, String title, String content, Timestamp createdAt) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createdAt = createdAt;
+    }
 }
