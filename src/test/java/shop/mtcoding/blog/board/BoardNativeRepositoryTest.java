@@ -1,5 +1,7 @@
 package shop.mtcoding.blog.board;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,15 @@ public class BoardNativeRepositoryTest {
     @Autowired
     private BoardNativeRepository boardNativeRepository;
 
+    @Autowired
+    private EntityManager em;
+
     @Test
     public void save_test() {
+
+        // 저장 전
+        List<Board> beforeList = boardNativeRepository.findAll();
+        System.out.println("저장 전 게시글 수: " + beforeList.size());
 
         //given
         String title = "제목6";
@@ -24,6 +33,10 @@ public class BoardNativeRepositoryTest {
 
         //when
         boardNativeRepository.save(title, content);
+
+        // 저장 후
+        List<Board> afterList = boardNativeRepository.findAll();
+        System.out.println("저장 후 게시글 수: " + afterList.size());
 
     }
 
@@ -46,7 +59,27 @@ public class BoardNativeRepositoryTest {
     @Test
     public void deleteById_test() {
         int id = 1;
+        // 삭제 전 데이터 조회
+        try {
+            Board beforeDelete = boardNativeRepository.findById(id);
+            System.out.println("삭제 전: " + beforeDelete);
+        } catch (NoResultException e) {
+            System.out.println("삭제 전: 해당 ID의 게시물이 없습니다.");
+        }
+
+        // 삭제 수행
         boardNativeRepository.deleteById(id);
+        System.out.println("삭제 수행 완료");
+
+        // 삭제 후 데이터 조회
+        try {
+            Board afterDelete = boardNativeRepository.findById(id);
+            System.out.println("삭제 후: " + afterDelete);
+        } catch (NoResultException e) {
+            System.out.println("삭제 후: 해당 ID의 게시물이 삭제되었습니다.");
+        }
+
+
     }
 
     @Test
