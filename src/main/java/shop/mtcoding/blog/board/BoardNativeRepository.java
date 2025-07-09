@@ -36,16 +36,16 @@ public class BoardNativeRepository {
 
 
     public List<Board> findAll() {
-        Query query = em.createNativeQuery("select * from board_tb order by id desc");
+        Query query = em.createNativeQuery("select id, title, content, created_at from board_tb order by id desc");
         List<Object[]> rows = query.getResultList();
 
         List<Board> boards = new ArrayList<>();
         for (Object[] row : rows) {
             Board board = new Board(
-                    ((Number) row[0]).intValue(),   // id
-                    (String) row[1],                // title
-                    (String) row[2],                // content
-                    (Timestamp) row[3]// created_at
+                    ((Number) row[0]).intValue(),
+                    (String) row[1],
+                    (String) row[2],
+                    (Timestamp) row[3]
             );
             boards.add(board);
         }
