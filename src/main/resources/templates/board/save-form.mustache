@@ -40,9 +40,12 @@
                     <input type="text" class="form-control" placeholder="Enter title" name="title">
                 </div>
                 <div class="mb-3">
-                    <textarea class="form-control" rows="5" name="content"></textarea>
+                    <textarea id="content" class="form-control" rows="5" name="content"></textarea>
                 </div>
-                <button class="btn btn-primary form-control">글쓰기완료</button>
+                  <div class="counter">
+                    글자 수: <span id="charCount">0</span>자
+                  </div>
+                <button action="/board/list" class="btn btn-primary form-control">글쓰기완료</button>
             </form>
         </div>
     </div>
@@ -54,6 +57,17 @@
     <button class="btn btn-outline-primary">고객센터</button>
     <button class="btn btn-outline-primary">오시는길</button>
 </footer>
+
+
+  <script>
+    const textarea = document.getElementById('content');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', () => {
+      charCount.textContent = textarea.value.length;
+    });
+  </script>
+
 </body>
 
 </html>
