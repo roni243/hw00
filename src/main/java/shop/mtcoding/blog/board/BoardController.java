@@ -36,14 +36,14 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     public String boardDetail(@PathVariable("id") int id, Model model){
-        Board board = boardNativeRepository.findById(id);
+        BoardResponse.DTO board = boardNativeRepository.findById(id);
         model.addAttribute("model", board);
         return "board/detail";
     }
 
     @GetMapping("/board/{id}/update-form")
     public String boardUpdateForm(@PathVariable("id") int id, Model model) {
-        Board board = boardNativeRepository.findById(id);
+        BoardResponse.DTO board = boardNativeRepository.findById(id);
 
         model.addAttribute("id", board.getId());
         model.addAttribute("title", board.getTitle());

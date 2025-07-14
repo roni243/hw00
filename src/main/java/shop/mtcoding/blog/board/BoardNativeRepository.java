@@ -36,7 +36,7 @@ public class BoardNativeRepository {
 
 
     public List<Board> findAll() {
-        Query query = em.createNativeQuery("select id, title, content, created_at, char_length(content) as content_length from board_tb order by id desc");
+        Query query = em.createNativeQuery("select id, title, content, created_at from board_tb order by id desc");
         List<Object[]> rows = query.getResultList();
 
         List<Board> boards = new ArrayList<>();
@@ -45,8 +45,7 @@ public class BoardNativeRepository {
                     ((Number) row[0]).intValue(),
                     (String) row[1],
                     (String) row[2],
-                    (Timestamp) row[3],
-                    ((Number) row[4]).intValue()
+                    (Timestamp) row[3]
             );
             boards.add(board);
         }
@@ -54,12 +53,21 @@ public class BoardNativeRepository {
         return boards;
     }
 
-    public Board findById(int id) {
-        Query query = em.createNativeQuery("select id, title, content, created_at, char_length(content) as content_length from board_tb where id = ?", Board.class);
-
+    public BoardResponse.DTO findById(int id) {
+        Query query = em.createNativeQuery("select id, title, content, created_at, char_length(content) as content_length from board_tb where id = ?");
         query.setParameter(1, id);
 
-        return (Board) query.getSingleResult();
+        Object[] row = (Object[])query.getSingleResult();
+
+            BoardResponse.DTO board = new BoardResponse.DTO(
+                    ((Number) row[0]).intValue(),
+                    (String) row[1],
+                    (String) row[2],
+                    (Timestamp) row[3],
+                    ((Number) row[4]).intValue()
+            );
+
+        return board;
     }
 
     @Transactional

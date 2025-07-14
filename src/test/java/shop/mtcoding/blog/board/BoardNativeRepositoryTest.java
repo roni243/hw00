@@ -51,7 +51,7 @@ public class BoardNativeRepositoryTest {
     @Test
     public void findById_test() {
         int id = 1;
-        Board board = boardNativeRepository.findById(id);
+        BoardResponse.DTO board = boardNativeRepository.findById(id);
         Assertions.assertThat(board.getTitle()).isEqualTo("제목1");
         Assertions.assertThat(board.getContent()).isEqualTo("내용1");
     }
@@ -61,7 +61,7 @@ public class BoardNativeRepositoryTest {
         int id = 1;
         // 삭제 전 데이터 조회
         try {
-            Board beforeDelete = boardNativeRepository.findById(id);
+            BoardResponse.DTO beforeDelete = boardNativeRepository.findById(id);
             System.out.println("삭제 전: " + beforeDelete);
         } catch (NoResultException e) {
             System.out.println("삭제 전: 해당 ID의 게시물이 없습니다.");
@@ -73,7 +73,7 @@ public class BoardNativeRepositoryTest {
 
         // 삭제 후 데이터 조회
         try {
-            Board afterDelete = boardNativeRepository.findById(id);
+            BoardResponse.DTO afterDelete = boardNativeRepository.findById(id);
             System.out.println("삭제 후: " + afterDelete);
         } catch (NoResultException e) {
             System.out.println("삭제 후: 해당 ID의 게시물이 삭제되었습니다.");

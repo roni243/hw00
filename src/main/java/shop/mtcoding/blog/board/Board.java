@@ -19,13 +19,11 @@ public class Board {
     private String title;
     private String content;
     private Timestamp createdAt;
-    private Integer contentLength;
 
-    public Board(Integer id, String title, String content, Timestamp createdAt, Integer contentLength) {
+    public Board(Integer id, String title, String content, Timestamp createdAt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
-        this.contentLength = contentLength;
     }
 }
