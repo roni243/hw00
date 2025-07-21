@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.user;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    @Autowired
     private final UserService userService;
+    private final HttpSession session;
 
     @GetMapping("/join-form")
     public String joinForm() {
@@ -21,6 +22,20 @@ public class UserController {
     @PostMapping("/join")
     public String join(UserRequest.JoinDTO joinDTO) {
         userService.join(joinDTO);
+        return "redirect:/board";
+    }
+
+    @GetMapping("/login-form")
+    public String loginForm() {
+        return "user/login-form";
+    }
+
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO loginDTO) {
+        User sessionUser =  userService.login(loginDTO);
+
+        session.setAttribute("sessionUser", sessionUser);
+
         return "redirect:/board";
     }
 }

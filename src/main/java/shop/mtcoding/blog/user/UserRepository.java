@@ -15,4 +15,10 @@ public class UserRepository {
     public void save(User user) {
         em.persist(user);
     }
+
+    public User findByUsername(String username) {
+        return em.createQuery("select u from User u where u.username = :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
 }
