@@ -30,13 +30,14 @@
             </button>
 
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav d-flex" style="gap: 10px;">
                     {{#sessionUser}}
                       <li><a href="/board/save-form">글쓰기</a></li>
                     {{/sessionUser}}
 
                     {{^sessionUser}}
                       <li><a href="/login-form">로그인</a></li>
+                      <div></div>
                       <li><a href="/join-form">회원가입</a></li>
                     {{/sessionUser}}
                 </ul>
