@@ -28,11 +28,13 @@ public class BoardNativeRepositoryTest {
         System.out.println("저장 전 게시글 수: " + beforeList.size());
 
         //given
-        String title = "제목6";
-        String content = "내용6";
+        Board board = Board.builder()
+                .title("제목6")
+                .content("내용6")
+                .build();
 
         //when
-        boardNativeRepository.save(title, content);
+        boardNativeRepository.save(board);
 
         // 저장 후
         List<Board> afterList = boardNativeRepository.findAll();

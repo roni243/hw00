@@ -19,11 +19,13 @@ public class BoardController {
 
     @Autowired
     private BoardNativeRepository boardNativeRepository;
+    private final BoardService boardService;
     private final HttpSession session;
 
     @PostMapping("/board/save")
-    public String boardsave(String title, String content){
-        boardNativeRepository.save(title, content);
+    public String boardsave(BoardRequest.SaveDTO saveDTO){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        boardService.save(saveDTO, sessionUser);
         return "redirect:/board";
     }
 

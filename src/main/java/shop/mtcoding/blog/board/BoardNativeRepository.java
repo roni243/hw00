@@ -16,14 +16,18 @@ public class BoardNativeRepository {
     @Autowired
     private EntityManager em;
 
-    @Transactional
-    public void save (String title, String content) {
-        Query query = em.createNativeQuery("insert into board_tb(title, content, created_at) values(?, ?, now())");
-        query.setParameter(1, title);
-        query.setParameter(2, content);
-
-        query.executeUpdate();
+    public void save(Board board) {
+        em.persist(board);
     }
+
+//    @Transactional
+//    public void save (String title, String content) {
+//        Query query = em.createNativeQuery("insert into board_tb(title, content, created_at) values(?, ?, now())");
+//        query.setParameter(1, title);
+//        query.setParameter(2, content);
+//
+//        query.executeUpdate();
+//    }
 
     @Transactional
     public void update(int id, String title, String content) {
