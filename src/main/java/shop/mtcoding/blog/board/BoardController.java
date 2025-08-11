@@ -69,7 +69,8 @@ public class BoardController {
 
     @PostMapping("/board/{id}/delete")
     public String boardDelete(@PathVariable("id") int id) {
-        boardNativeRepository.deleteById(id);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        boardService.delete(id, sessionUser);
         return "redirect:/board";
     }
 }

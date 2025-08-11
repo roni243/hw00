@@ -58,7 +58,14 @@ public class BoardNativeRepository {
     }
 
     public BoardResponse.DTO findById(int id) {
-        Query query = em.createNativeQuery("select id, title, content, created_at, char_length(content) as content_length from board_tb where id = ?");
+        String sql = """
+                select b.id, b.title, b.content, b.created_at, char_length(b.content) as content_length, u.id as user_id, u.username
+                from board_tb b
+                join user_tb u on b.user_id = u.id
+                where b.id = ?
+                """;
+
+        Query query = em.createNativeQuery(sql);
         query.setParameter(1, id);
 
         Object[] row = (Object[])query.getSingleResult();
@@ -68,7 +75,9 @@ public class BoardNativeRepository {
                     (String) row[1],
                     (String) row[2],
                     (Timestamp) row[3],
-                    ((Number) row[4]).intValue()
+                    ((Number) row[4]).intValue(),
+                    ((Number) row[5]).intValue(),
+                    (String) row[6]
             );
 
         return board;
