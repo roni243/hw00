@@ -39,8 +39,4 @@ public class UserController {
         return "redirect:/board";
     }
 
-    @GetMapping("/header")
-    public String header() {
-        return "layout/header";
-    }
 }
